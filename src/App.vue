@@ -2,9 +2,12 @@
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { openUrl } from "@tauri-apps/plugin-opener";
+import { checkAndInstallUpdate } from "./utils/updater";
 
 const greetMsg = ref("");
 const name = ref("");
+const updateMessage = ref("");
+const isUpdating = ref(false);
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
@@ -18,6 +21,22 @@ async function openExternalWebsite() {
     console.log("成功打开外部网站");
   } catch (error) {
     console.error("打开外部网站失败:", error);
+  }
+}
+
+// 检查并安装更新
+async function handleUpdate() {
+  if (isUpdating.value) return;
+  
+  try {
+    isUpdating.value = true;
+    updateMessage.value = "正在检查更新...";
+    const result = await checkAndInstallUpdate();
+    updateMessage.value = result.message;
+  } catch (error) {
+    updateMessage.value = `更新失败: ${error}`;
+  } finally {
+    isUpdating.value = false;
   }
 }
 </script>
@@ -50,6 +69,14 @@ async function openExternalWebsite() {
         打开外部网站
       </button>
     </div>
+    
+    <!-- 更新功能 -->
+    <div class="row" style="margin-top: 20px;">
+      <button @click="handleUpdate" type="button" class="open-button" :disabled="isUpdating">
+        {{ isUpdating ? '检查中...' : '检查更新' }}
+      </button>
+    </div>
+    <p v-if="updateMessage" style="margin-top: 10px;">{{ updateMessage }}</p>
   </main>
 </template>
 
