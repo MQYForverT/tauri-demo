@@ -20,16 +20,16 @@
 ```bash
 # 安装项目依赖
 pnpm install
-
-# 安装 Tauri CLI
-pnpm install -g @tauri-apps/cli
 ```
 
 ### 2. 本地开发
 
 ```bash
-# 启动开发服务器
+# 启动开发服务器（网页）
 pnpm dev
+
+# 启动开发服务器（网页 + 应用）
+pnpm tauri dev
 ```
 
 ## 应用更新流程
