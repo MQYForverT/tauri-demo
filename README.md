@@ -173,7 +173,8 @@ git push --set-upstream origin master
 ### 1. 更新版本号
 
 1. 在 `src-tauri/Cargo.toml` 中更新 `version` 字段
-2. 在 `package.json` 中更新 `version` 字段
+2. 在 `src-tauri/tauri.conf.json` 中更新 `version` 字段
+3. 在 `package.json` 中更新 `version` 字段
 
 ### 2. 构建新版本
 

@@ -43,7 +43,7 @@ async function handleUpdate() {
 
 <template>
   <main class="container">
-    <h1>Welcome to Tauri + Vue1</h1>
+    <h1>Welcome to Tauri + Vue3</h1>
 
     <div class="row">
       <a href="https://vitejs.dev" target="_blank">
